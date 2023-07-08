@@ -9,11 +9,11 @@ on:
       - main
 
 jobs:
-  build:
+  build-windows-msi:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -24,12 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install cx_Freeze
       
-      - name: Build MSI
+      - name: Build EXE
         # run: python build_windows.py bdist_msi
         run: cxfreeze -c main.py --target-dir dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: myapp-msi
-          path: dist/main.msi
+          name: myapp-exe
+          path: dist/main.exe
