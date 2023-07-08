@@ -9,16 +9,27 @@ on:
       - main
 
 jobs:
-  build:
+  build-windows-msi:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-        
-      - run: mkdir -p path/to/artifact
-        
-      - run: echo hello > path/to/artifact/world.txt
-        
-      - uses: actions/upload-artifact@v3
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          name: my-artifact
-          path: path/to/artifact/world.txt
+          python-version: 3.11
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install cx_Freeze
+      
+      - name: Build EXE
+        # run: python build_windows.py bdist_msi
+        run: cxfreeze -c main.py --target-dir dist
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: myapp-exe
+          path: ./dist/
