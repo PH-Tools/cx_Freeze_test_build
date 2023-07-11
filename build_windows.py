@@ -33,7 +33,7 @@ base = "Win32GUI" if sys.platform == "win32" else None
 bdist_msi_options = {
     "add_to_path": False,
     "initial_target_dir": "C:\\CarbonCheck",
-    "name": "CarbonCheck",
+    # "name": "CarbonCheck",
 }
 
 icon_file = find_data_file(
