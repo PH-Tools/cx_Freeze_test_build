@@ -19,7 +19,7 @@ def find_data_file(filename):
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
-    "includes": ["ph-units"],
+    "includes": ["ph_units"],
     "excludes": ["html", "tcl8", "tcl8.6", "tk8.6", "tkinter", "unittest"],
     "zip_include_packages": [
         "PyQt6",
