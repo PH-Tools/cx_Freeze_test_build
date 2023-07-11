@@ -43,7 +43,7 @@ icon_file = find_data_file(
 setup(
     name="CarbonCheck",
     version="0.1",
-    description="Passive House Model Baseliner and Reporting.",
+    description="Passive House Modell Baseliner and Reporting.",
     options={
         "build_exe": build_exe_options,
         "bdist_msi": bdist_msi_options,
