@@ -1,10 +1,6 @@
-import tkinter as tk
+from PyQt6.QtWidgets import QApplication, QLabel
 
-root = tk.Tk()
-root.title("Sample Window")
-root.geometry("300x200")
-
-label = tk.Label(root, text="Hello, World!")
-label.pack()
-
-root.mainloop()
+app = QApplication([])
+label = QLabel("Hello, World!")
+label.show()
+app.exec()

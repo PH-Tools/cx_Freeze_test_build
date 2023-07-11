@@ -21,10 +21,12 @@ def find_data_file(filename):
 build_exe_options = {
     # "build_exe": "Installers",
     "includes": [],
-    "excludes": [],
-    "zip_include_packages": [],
+    "excludes": ["html", "tcl8", "tcl8.6", "tk8.6", "tkinter", "unittest"],
+    "zip_include_packages": [
+        "PyQt6",
+    ],
     "include_files": [(Path("CC_GUI", "resources").resolve(), "resources")],
-    "include_msvcr": False,
+    "include_msvcr": True,
 }
 
 # base="Win32GUI" should be used only for Windows GUI app
