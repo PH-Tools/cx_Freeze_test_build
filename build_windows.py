@@ -23,7 +23,7 @@ build_exe_options = {
     "includes": [],
     "excludes": [],
     "zip_include_packages": [],
-    "include_files": [("CC_GUI\\resources", "resources")],
+    "include_files": [(Path("CC_GUI", "resources").resolve(), "resources")],
     "include_msvcr": False,
 }
 
@@ -39,7 +39,6 @@ bdist_msi_options = {
 icon_file = find_data_file(
     Path("CC_GUI", "resources", "logo_CarbonCheck.ico").resolve()
 )
-print(icon_file)
 setup(
     name="CarbonCheck",
     version="0.1",
