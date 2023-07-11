@@ -19,7 +19,7 @@ def find_data_file(filename):
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
-    # "target_dir": "Installers",
+    # "build_exe": "Installers",
     "includes": [],
     "excludes": [],
     "zip_include_packages": [],
@@ -33,7 +33,7 @@ base = "Win32GUI" if sys.platform == "win32" else None
 bdist_msi_options = {
     "add_to_path": False,
     "initial_target_dir": "C:\\CarbonCheck",
-    # "name": "CarbonCheck",
+    "target_name": "CarbonCheck.msi",
 }
 
 icon_file = find_data_file(
