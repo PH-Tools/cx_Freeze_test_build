@@ -26,7 +26,7 @@ jobs:
       
       - name: Build EXE
         # run: python build_windows.py bdist_msi
-        run: cxfreeze -c main.py --target-dir Installers
+        run: cxfreeze -c CarbonCheck.py --target-dir Installers
         # run: python build_windows.py bdist_msi
         # run: python build_windows.py bdist_exe
       
