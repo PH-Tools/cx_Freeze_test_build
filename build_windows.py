@@ -19,7 +19,7 @@ def find_data_file(filename):
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
-    "target_dir": "Installers",
+    # "target_dir": "Installers",
     "includes": [],
     "excludes": [],
     "zip_include_packages": [],
