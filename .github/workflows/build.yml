@@ -25,7 +25,6 @@ jobs:
           pip install cx_Freeze
       
       - name: Build MSI File
-        # run: cxfreeze -c CarbonCheck.py --target-dir Installers
         run: python build_windows.py bdist_msi
 
       # Make sure Github settings / permissions allow 
