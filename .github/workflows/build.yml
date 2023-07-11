@@ -2,6 +2,7 @@ name: Build Windows MSI
 
 on:
   pull_request:
+    types: [closed]
     branches:
       - main
 
