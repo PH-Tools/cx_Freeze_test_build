@@ -33,4 +33,4 @@ jobs:
           git config --global user.name "GitHub Actions"
           git add dist\CarbonCheck.msi
           git commit -m "Add new EXE file"
-          git push
+          git push origin HEAD:main
