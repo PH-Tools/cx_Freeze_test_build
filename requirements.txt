@@ -1,2 +1,12 @@
+ladybug-core
+honeybee-core
+honeybee-energy
+honeybee-ph
+PH-units
+PHX
+PH-Baseliner
+rich
 PyQt6
-ph-units
+PyYAML
+pdfplumber
+xlwings
