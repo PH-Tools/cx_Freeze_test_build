@@ -28,20 +28,17 @@ jobs:
           pip install -r dev_requirements.txt
           pip install -r requirements.txt
 
-      - name: Build MSI File
-        # - customize the suffix with the os-type-name
+      - name: Build MSI file
         run: |
-          $os_name = "${{ runner.os }}".ToLower()
-          python build_windows.py bdist_msi CarbonCheck_$os_name
+          python build_windows.py bdist_msi --target-name=CarbonCheck
 
       # Make sure Github settings / permissions allow
       # read / write access to Actions
       - name: Commit changes
         run: |
-          $os_name = "${{ runner.os }}".ToLower()
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git pull origin main
-          git add dist\CarbonCheck_${os_name}.msi
+          git add dist\*.msi
           git commit -m "Add new EXE file"
           git push origin HEAD:main

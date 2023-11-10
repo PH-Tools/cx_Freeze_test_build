@@ -1,6 +1,6 @@
 """cx_Freeze Build configuration for Windows MSI Installer.
 
-to run: "python build_windows.py bdist_msi { name } "
+to run: "python build_windows.py bdist_msi"
 """
 
 import sys
@@ -39,12 +39,11 @@ base = "Win32GUI" if sys.platform == "win32" else None
 
 
 # -----------------------------------------------------------------------------
-# Get the target name from the command line arguments
-target_name = sys.argv[1] if len(sys.argv) > 1 else "CarbonCheck"
+# Get the target name for the .MSI file created
 bdist_msi_options = {
     "add_to_path": False,
     "initial_target_dir": "C:\\CarbonCheck",
-    "target_name": target_name,
+    "target_name": "CarbonCheck",
 }
 
 
