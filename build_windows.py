@@ -1,6 +1,10 @@
 """cx_Freeze Build configuration for Windows MSI Installer.
 
-to run: "python build_windows.py bdist_msi"
+The build is designed to be run from a GitHub Action (.github/workflows/build.yml) and will
+automatically rebuild the application when triggered. It will create the .msi installer file within 
+a "dist" folder, and add it as an artifact to the GitHub repo.
+
+to run from command-line: "python build_windows.py bdist_msi"
 """
 
 import sys
@@ -44,6 +48,7 @@ bdist_msi_options = {
     "add_to_path": False,
     "initial_target_dir": "C:\\CarbonCheck",
     "target_name": "CarbonCheck",
+    "target_version": "0.0.1",
 }
 
 
