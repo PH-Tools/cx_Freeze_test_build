@@ -1,8 +1,13 @@
 name: Build Windows MSI
 
+# on:
+#   pull_request:
+#     types: [closed]
+#     branches:
+#       - main
+
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches:
       - main
 
@@ -26,14 +31,14 @@ jobs:
       - name: Build MSI File
         # - customize the suffix with the os-type-name
         run: |
-          os_name=$(echo "${{ runner.os }}" | tr '[:upper:]' '[:lower:]')
+          $os_name = "${{ runner.os }}".ToLower()
           python build_windows.py bdist_msi CarbonCheck_$os_name
 
       # Make sure Github settings / permissions allow
       # read / write access to Actions
       - name: Commit changes
         run: |
-          os_name=$(echo "${{ runner.os }}" | tr '[:upper:]' '[:lower:]')
+          $os_name = "${{ runner.os }}".ToLower()
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git pull origin main
