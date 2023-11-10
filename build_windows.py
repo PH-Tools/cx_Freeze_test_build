@@ -4,15 +4,25 @@ The build is designed to be run from a GitHub Action (.github/workflows/build.ym
 automatically rebuild the application when triggered. It will create the .msi installer file within 
 a "dist" folder, and add it as an artifact to the GitHub repo.
 
+Most of the attributes (version, name) are read in from the pyproject.toml file.
+
 to run from command-line: "python build_windows.py bdist_msi"
 """
 
 import sys
 import os
 from pathlib import Path
+import toml
 from cx_Freeze import setup, Executable
 
 
+# -----------------------------------------------------------------------------
+# Read the pyproject.toml file with then various build options / attributes
+pyproject = toml.load("pyproject.toml")["tool"]["cx_Freeze"]
+
+
+# -----------------------------------------------------------------------------
+# -- Find the Icon file
 def find_data_file(filename) -> str:
     if getattr(sys, "frozen", False):
         # The application is frozen
@@ -22,7 +32,9 @@ def find_data_file(filename) -> str:
         # Change this bit to match where you store your data files:
         data_dir = os.path.dirname(__file__)
     return os.path.join(data_dir, filename)
-
+ICON_FILE = find_data_file(
+    Path("CC_GUI", "resources", "logo_CarbonCheck.ico").resolve()
+)
 
 # -----------------------------------------------------------------------------
 # Dependencies are automatically detected, but it might need fine tuning.
@@ -45,21 +57,19 @@ base = "Win32GUI" if sys.platform == "win32" else None
 # -----------------------------------------------------------------------------
 # Get the target name for the .MSI file created
 bdist_msi_options = {
-    "add_to_path": False,
-    "initial_target_dir": "C:\\CarbonCheck",
-    "target_name": "CarbonCheck",
-    "target_version": "0.0.1",
+    "add_to_path": pyproject["bdsist"]["msi"]["add_to_path"],
+    "initial_target_dir": pyproject["bdsist"]["msi"]["initial_target_dir"],
+    "target_name": pyproject["bdsist"]["msi"]["target_name"],
+    "target_version": pyproject["bdsist"]["msi"]["target_version"],
 }
 
 
 # -----------------------------------------------------------------------------
-icon_file = find_data_file(
-    Path("CC_GUI", "resources", "logo_CarbonCheck.ico").resolve()
-)
+
 setup(
-    name="CarbonCheck",
-    version="0.1",
-    description="Passive House Model Baseliner and Reporting.",
+    name=pyproject["app"]["name"],
+    version=pyproject["bdsist"]["msi"]["target_version"],
+    description=pyproject["app"]["description"],
     options={
         "build_exe": build_exe_options,
         "bdist_msi": bdist_msi_options,
@@ -67,9 +77,9 @@ setup(
     executables=[
         Executable(
             "CarbonCheck.py",
-            copyright="Copyright (C) 2023 Passive House Accelerator",
+            copyright=["app"]["copyright"],
             base=base,
-            icon=icon_file,
+            icon=ICON_FILE,
         )
     ],
 )

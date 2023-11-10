@@ -1,0 +1,10 @@
+[tool.cx_Freeze.bdsist.msi]
+target_name = "CabonCheck"
+target_version = "0.0.1"
+initial_target_dir = "C:\\CarbonCheck"
+add_to_path = false
+
+[tool.cx_Freeze.app]
+name = "CarbonCheck"
+description = "Passive House Model Baseliner and Reporting."
+copyright = "Copyright (C) 2023 Passive House Accelerator"
