@@ -1,4 +1,7 @@
-"""cx_Freeze Build configuration for Windows MSI Installer."""
+"""cx_Freeze Build configuration for Windows MSI Installer.
+
+to run: "python build_windows.py bdist_msi { name } "
+"""
 
 import sys
 import os
@@ -6,7 +9,7 @@ from pathlib import Path
 from cx_Freeze import setup, Executable
 
 
-def find_data_file(filename):
+def find_data_file(filename) -> str:
     if getattr(sys, "frozen", False):
         # The application is frozen
         data_dir = os.path.dirname(sys.executable)
@@ -17,6 +20,7 @@ def find_data_file(filename):
     return os.path.join(data_dir, filename)
 
 
+# -----------------------------------------------------------------------------
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
     "includes": ["ph_units"],
@@ -28,22 +32,30 @@ build_exe_options = {
     "include_msvcr": True,
 }
 
+
+# -----------------------------------------------------------------------------
 # base="Win32GUI" should be used only for Windows GUI app
 base = "Win32GUI" if sys.platform == "win32" else None
 
+
+# -----------------------------------------------------------------------------
+# Get the target name from the command line arguments
+target_name = sys.argv[1] if len(sys.argv) > 1 else "CarbonCheck"
 bdist_msi_options = {
     "add_to_path": False,
     "initial_target_dir": "C:\\CarbonCheck",
-    "target_name": "CarbonCheck.msi",
+    "target_name": target_name,
 }
 
+
+# -----------------------------------------------------------------------------
 icon_file = find_data_file(
     Path("CC_GUI", "resources", "logo_CarbonCheck.ico").resolve()
 )
 setup(
     name="CarbonCheck",
     version="0.1",
-    description="Passive House Modell Baseliner and Reporting.",
+    description="Passive House Model Baseliner and Reporting.",
     options={
         "build_exe": build_exe_options,
         "bdist_msi": bdist_msi_options,
