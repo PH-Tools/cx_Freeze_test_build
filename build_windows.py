@@ -40,7 +40,7 @@ ICON_FILE = find_data_file(
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
     "includes": ["ph_units"],
-    "excludes": ["html", "tcl8", "tcl8.6", "tk8.6", "tkinter", "unittest"],
+    "excludes": ["tcl8", "tcl8.6", "tk8.6", "tkinter", "unittest"],
     "zip_include_packages": [
         "PyQt6",
     ],
@@ -77,7 +77,7 @@ setup(
     executables=[
         Executable(
             "CarbonCheck.py",
-            copyright=["app"]["copyright"],
+            copyright=pyproject["app"]["copyright"],
             base=base,
             icon=ICON_FILE,
         )
